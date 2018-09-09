@@ -5,10 +5,13 @@ import { ApolloProvider } from 'react-apollo';
 import SongList from './components/SongList.js';
 import { Router, Route, hashHistory, IndexRoute } from 'react-router';
 import App from './components/App';
+import SongDetail from './components/SongDetail';
 import SongCreate from './components/SongCreate';
 import './style/style.css';
 
-const client = new ApolloClient({});
+const client = new ApolloClient({
+  dataIdFromObject: object => object.id
+});
 
 const Root = () => {
   return (
@@ -17,6 +20,7 @@ const Root = () => {
         <Route path="/" component={App}>
           <IndexRoute component={SongList} />
           <Route path="/songs/new" component={SongCreate} />
+          <Route path="/songs/:id" component={SongDetail} />
         </Route>
       </Router>
     </ApolloProvider>

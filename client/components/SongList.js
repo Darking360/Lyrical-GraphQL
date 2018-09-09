@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import gql from 'graphql-tag';
 import { graphql } from 'react-apollo';
-import { Link } from 'react-router';
+import { Link, hashHistory } from 'react-router';
 import query from '../queries/fetchSongs';
 
 class SongList extends Component {
@@ -27,13 +27,15 @@ class SongList extends Component {
     if (!data.loading) {
       return data.songs.map((song) => {
         return(
-          <li key={song.id} className="collection-item">
-            { song.title }
-            <i 
-              className="material-icons icon"
-              onClick={() => this.handleDelete(song.id)}
-            >delete</i>
-          </li>
+          <Link to={`/songs/${song.id}`}>
+            <li key={song.id} className="collection-item"> 
+              { song.title }
+              <i 
+                className="material-icons icon"
+                onClick={() => this.handleDelete(song.id)}
+              >delete</i>
+            </li>
+          </Link>
         )
       });
     } else {
