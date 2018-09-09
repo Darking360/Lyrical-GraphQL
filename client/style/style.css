@@ -7,3 +7,13 @@
   cursor: pointer;
   color: black;
 }
+
+.likes-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.likes-container span {
+  margin-right: 1em;
+}

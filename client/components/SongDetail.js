@@ -3,6 +3,7 @@ import query from '../queries/fetchSong';
 import { graphql } from 'react-apollo';
 import { Link } from 'react-router';
 import LyricCreate from './LyricCreate';
+import SongLyric from './SongLyric';
 
 class SongDetail extends Component {
 
@@ -35,13 +36,22 @@ class SongDetail extends Component {
     }
   }
 
+  thumbsUp = (id) => {
+    const {
+      mutate
+    } = this.props;
+    mutate({
+      variables: {
+        id
+      }
+    });
+  }
+
   renderLyrics = (lyrics) => {
     return lyrics.map((lyric) => {
       return(
-        <li key={lyric.id} className="collection-item">
-          { lyric.content }
-        </li>
-      )
+        <SongLyric key={lyric.id} lyric={lyric} />
+      );
     })
   }
 
